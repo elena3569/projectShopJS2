@@ -5,7 +5,7 @@ export default {
     cartList: [],
     curProd: {},
     totalSum: 0,
-    colorBlack: false,
+    amount: 0,
   },
   getters: {
     cartList(state) {
@@ -14,11 +14,11 @@ export default {
     curProd(state) {
       return state.curProd;
     },
-    colorBlack(state) {
-      return state.colorBlack;
-    },
     totalSum(state) {
       return state.totalSum;
+    },
+    amount(state) {
+      return state.amount;
     },
   },
   mutations: {
@@ -28,24 +28,27 @@ export default {
     SET_CUR_PROD(state, data) {
       state.curProd = data;
     },
-    SET_COLOR(state, data) {
-      state.colorBlack = data;
-    },
     SET_TOTAL_SUM(state, data) {
       state.totalSum = data;
     },
+    SET_AMOUNT(state, data) {
+      state.amount = data;
+    },
   },
   actions: {
-    async getBasketList({ commit }) {
+    async getBasketList({rootState, commit }) {
       const { data: cartList } = await axios.get('http://localhost:3000/api/cart');
       commit('SET_CART_LIST', cartList.contents);
+      if (rootState.searchQueryInCart !== '') {
+        const regexp = new RegExp(rootState.searchQueryInCart, 'i');
+        const filtered = cartList.contents.filter((el) => regexp.test(el.product_name));
+        commit('SET_CART_LIST', filtered);
+      }
       commit('SET_TOTAL_SUM', cartList.totalSum);
+      commit('SET_AMOUNT', cartList.amount);
     },
     upCurProd({ commit }, product){
       commit('SET_CUR_PROD', product);
-    },
-    upColor({commit}, color){
-      commit('SET_COLOR', color);
     },
     postD({state}) {
       axios.post(`http://localhost:3000/api/cart`, state.curProd);

@@ -1,63 +1,76 @@
 <template>
-  <div class="footerHolder">
-    <footer class="footer center">
-      <div class="footer_left">&copy; Brand All Rights Reserved.</div>
-      <div class="footer_right">
-        <div class="icons">
-          <a href="#" class="icons_item">
-            <i class="fab fa-facebook-f"></i>
-          </a>
+  <footer class="footer center">
+    <div class="footer_left">{{ year }} &copy; Brand All Rights Reserved.</div>
+    <div class="footer_right">
+      <div class="icons">
+        <a href="#" class="icons_item">
+          <i class="fab fa-facebook-f"></i>
+        </a>
 
-          <a href="#" class="icons_item">
-            <i class="fab fa-instagram"></i>
-          </a>
+        <a href="#" class="icons_item">
+          <i class="fab fa-instagram"></i>
+        </a>
 
-          <a href="#" class="icons_item">
-            <i class="fab fa-pinterest-p"></i>
-          </a>
+        <a href="#" class="icons_item">
+          <i class="fab fa-pinterest-p"></i>
+        </a>
 
-          <a href="#" class="icons_item">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </div>
+        <a href="#" class="icons_item">
+          <i class="fab fa-twitter"></i>
+        </a>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 </template>
 
 <script>
 export default {
   name: 'myFooter',
+  date() {
+    return {
+      year: '',
+    };
+  },
+  created() {
+    const date = new Date();
+    this.year = date.getFullYear();
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style scoped>
 .footer {
-  background: darkgray;
-  height: 100px;
-  margin: auto;
+  background: #403034;
+  margin-top: 40px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.footerHolder {
-  background: none repeat scroll 0 0 transparent;
+.footer_left {
+  font-size: 16px;
+  line-height: 19px;
+  color: #fafafa;
+}
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+.icons_item:not(:last-child) {
+  margin-right: 8px;
+}
+.icons_item {
+  display: block;
+  background-color: #fff;
+  color: black;
   text-align: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
+  padding: 6px 12px;
+}
+
+.icons_item:hover {
+  background-color: #ff6498;
+  color: white;
 }
 </style>

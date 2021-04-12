@@ -1,26 +1,24 @@
 <template>
-  <div class="productsInCart">
-    <p v-if="cartList.length === 0">Корзина пуста</p>
-    <cart-item
-      class="cart-item"
-      v-for="product of cartList"
-      :product="product"
-      :key="product.id_product"
-      :img="imgCart"
-    >
-    </cart-item>
-    <p class="totalSum">Итого: {{ totalSum }}</p>
+  <div class="cart">
+    <h1>Корзина</h1>
+    <search-component
+      placehold="Поиск по корзине"
+      v-bind:name-page="this.$route.name"
+    ></search-component>
+    <cart-list></cart-list>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import cartItem from '../components/newItemCart.vue';
+import searchComponent from '../components/Search/searchComp';
+import cartList from '../components/Cart/cartList.vue';
 
 export default {
   name: 'Cart',
   components: {
-    cartItem,
+    cartList,
+    searchComponent,
   },
   data() {
     return {
@@ -41,3 +39,5 @@ export default {
   },
 };
 </script>
+<style scoped>
+</style>

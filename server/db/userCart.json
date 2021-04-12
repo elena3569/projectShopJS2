@@ -1,5 +1,6 @@
 {
-    "totalSum": 150400,
+    "amount": 7,
+    "totalSum": 145400,
     "contents": [
         {
             "id_product": 457,
@@ -23,7 +24,7 @@
             "id_product": 456,
             "product_name": "Мышка",
             "price": 1000,
-            "quantity": 6
+            "quantity": 1
         }
     ]
 }
